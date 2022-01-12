@@ -1,17 +1,10 @@
 package com.example.gymClassBooking;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GymClassWithUser {
-
-    // https://www.medley.se/boka-pass#?productIds=20574,21493&businessUnitIds=14378&startDate=2022-01-12
-    // https://www.medley.se/boka-pass#?productIds=16601,16809,16577&businessUnitIds=14378&startDate=2022-01-14
-    // https://www.medley.se/boka-pass#?productIds=20875&businessUnitIds=14378&startDate=2022-01-11
-    // BODYPUMP = "16601,16809,16577"
 
     LocalDateTime dateWithTime;
     String userName;
@@ -19,12 +12,8 @@ public class GymClassWithUser {
     String classId;
     String url;
 
-    @Value("${webmainpage}")
-    String webMainPage;
-
-
-
-
+    String webMainPage1 = "https://www.medl";
+    String webMainPage2 = "ey.se/boka-pass#?productIds=";
 
     public GymClassWithUser(String localDateTime, String className, String userName, String password) {
 
@@ -36,22 +25,20 @@ public class GymClassWithUser {
         }
 
         this.dateWithTime = LocalDateTime.of(
-                ej.get(0), ej.get(1), ej.get(2), ej.get(3), ej.get(4)
+                2022, ej.get(0), ej.get(1), ej.get(2), ej.get(3)
         );
 
         this.userName = userName;
         this.password = password;
         this.classId = Classes.getGymClass(className);
-        // https://www.GYMHERE.se/boka-pass#?businessUnitIds= + classId + &startDate= + 2022-01-03
-        this.url = webMainPage + classId + "&startDate=" + dateWithTime.toLocalDate().toString();
+
+        this.url = webMainPage1 + webMainPage2 + classId + "&businessUnitIds=14378&startDate=" + dateWithTime.toLocalDate().toString();
 
         System.out.println(url);
     }
 
 
-
-        //System.out.println(LocalDateTime.now());
-
+    //System.out.println(LocalDateTime.now());
 
 
     public String getUserName() {

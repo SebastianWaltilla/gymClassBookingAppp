@@ -6,9 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
+@Component
 public class BookingScript {
 
 
@@ -27,32 +31,47 @@ public class BookingScript {
 
         //TimeUnit.MINUTES.sleep(4);
 
-        System.setProperty(path, path);
-        WebDriver driver = new ChromeDriver();
+        gymClassWithUser.getUrl();
+        try{
+            System.out.println(gymClassWithUser.getUrl());
+            System.out.println("hej");
 
-        Dimension d = new Dimension(800, 640);
-        driver.manage().window().fullscreen();
+            System.out.println("hej");
+            System.setProperty("webdriver.chrome.whitelistedIps", "");
 
-        //driver.manage().deleteAllCookies();
+            System.setProperty("webdriver.chrome.driver", "C:\\Users\\sebas\\Desktop\\chromedriver_win32\\chromedriver.exe");
 
-        //Specifiying pageLoadTimeout and Implicit wait
-        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            WebDriver driver = new ChromeDriver();
 
-        // Url to gym class: Example https://www.medley.se/boka-pass#?productIds=20875&businessUnitIds=14378&startDate=2022-01-09
-        driver.get(gymClassWithUser.getUrl());
-        TimeUnit.SECONDS.sleep(2);
 
-        //Click gym class button
-        WebElement bookbutton = driver.findElement(By.className("activity-book"));
-        bookbutton.click();
+            System.out.println("hej");
+            driver.manage().window().fullscreen();
 
-        // fill credentials
-        driver.findElement(By.name("userName")).sendKeys(gymClassWithUser.getUserName());
-        driver.findElement(By.name("password")).sendKeys(gymClassWithUser.getPassword());
+            //driver.manage().deleteAllCookies();
 
-        //Click book button
-        WebElement searchIcon = driver.findElement(By.className("button"));
-        searchIcon.click();
+            //Specifiying pageLoadTimeout and Implicit wait
+            driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+            // Url to gym class: Example https://www.medley.se/boka-pass#?productIds=20875&businessUnitIds=14378&startDate=2022-01-09
+            driver.get(gymClassWithUser.getUrl());
+            TimeUnit.SECONDS.sleep(2);
+
+            //Click gym class button
+            WebElement bookbutton = driver.findElement(By.className("activity-book"));
+            bookbutton.click();
+
+            // fill credentials
+            driver.findElement(By.name("userName")).sendKeys(gymClassWithUser.getUserName());
+            driver.findElement(By.name("password")).sendKeys(gymClassWithUser.getPassword());
+
+            //Click book button
+            WebElement searchIcon = driver.findElement(By.className("button"));
+            searchIcon.click();
+
+        } catch (Exception e){
+            System.out.println(e);
+        }
+
     }
 }
