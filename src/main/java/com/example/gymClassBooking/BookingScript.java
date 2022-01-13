@@ -1,13 +1,10 @@
 package com.example.gymClassBooking;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
@@ -32,28 +29,21 @@ public class BookingScript {
         //TimeUnit.MINUTES.sleep(4);
 
         gymClassWithUser.getUrl();
-        try{
+        try {
             System.out.println(gymClassWithUser.getUrl());
-            System.out.println("hej");
 
-            System.out.println("hej");
             System.setProperty("webdriver.chrome.whitelistedIps", "");
-
             System.setProperty("webdriver.chrome.driver", "C:\\Users\\sebas\\Desktop\\chromedriver_win32\\chromedriver.exe");
 
             WebDriver driver = new ChromeDriver();
-
-
-            System.out.println("hej");
             driver.manage().window().fullscreen();
-
             //driver.manage().deleteAllCookies();
 
             //Specifiying pageLoadTimeout and Implicit wait
             driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
             driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-            // Url to gym class: Example https://www.medley.se/boka-pass#?productIds=20875&businessUnitIds=14378&startDate=2022-01-09
+            // Url to gym class: Example https://www.mey.se/boka-pass#?productIds=20875&businessUnitIds=14378&startDate=2022-01-09
             driver.get(gymClassWithUser.getUrl());
             TimeUnit.SECONDS.sleep(2);
 
@@ -69,9 +59,8 @@ public class BookingScript {
             WebElement searchIcon = driver.findElement(By.className("button"));
             searchIcon.click();
 
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
-
     }
 }

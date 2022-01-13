@@ -11,35 +11,39 @@ public class GymClassWithUser {
     String password;
     String classId;
     String url;
+    String bookingQuery;
 
-    String webMainPage1 = "https://www.medl";
-    String webMainPage2 = "ey.se/boka-pass#?productIds=";
+    public String getBookingQuery() {
+        return bookingQuery;
+    }
 
-    public GymClassWithUser(String localDateTime, String className, String userName, String password) {
+    public void setBookingQuery(String bookingQuery) {
+        this.bookingQuery = bookingQuery;
+    }
 
-        //LocalDateTime.of(2022,1,8,16,30);
-        String[] dT = localDateTime.split(",");
-        List<Integer> ej = new ArrayList<>();
-        for (String h : dT) {
-            ej.add(Integer.valueOf(h));
-        }
+    public GymClassWithUser(String localDateTime, String className, String userName, String password, String bookingQuery) {
+        String webMainPage1 = "https://www.medl";
+        String webMainPage2 = "ey.se/boka-pass#?productIds=";
 
-        this.dateWithTime = LocalDateTime.of(
-                2022, ej.get(0), ej.get(1), ej.get(2), ej.get(3)
-        );
-
+        this.dateWithTime = createLocalDateTimeFromString(localDateTime);
+        this.bookingQuery = bookingQuery;
         this.userName = userName;
         this.password = password;
         this.classId = Classes.getGymClass(className);
-
         this.url = webMainPage1 + webMainPage2 + classId + "&businessUnitIds=14378&startDate=" + dateWithTime.toLocalDate().toString();
-
         System.out.println(url);
     }
 
+    public LocalDateTime createLocalDateTimeFromString(String localDateTime) {
 
-    //System.out.println(LocalDateTime.now());
-
+        //LocalDateTime.of(2022,1,8,16,30);
+        String[] dT = localDateTime.split(",");
+        List<Integer> t = new ArrayList<>();
+        for (String h : dT) {
+            t.add(Integer.valueOf(h));
+        }
+        return LocalDateTime.of(2022, t.get(0), t.get(1), t.get(2), t.get(3));
+    }
 
     public String getUserName() {
         return userName;

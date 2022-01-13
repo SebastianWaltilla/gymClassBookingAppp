@@ -3,9 +3,6 @@ package com.example.gymClassBooking;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Component
 public class Users {
 
@@ -27,7 +24,7 @@ public class Users {
     @Value("${user.matilda.password}")
     String user2p;
 
-    public String[] getUsers(String user){
+    public String[] getUsers(String user) {
 
         if (user.equals("SEBASTIAN")) {
             return new String[]{user1, user1p};
