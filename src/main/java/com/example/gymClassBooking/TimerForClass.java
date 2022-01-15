@@ -12,9 +12,9 @@ public class TimerForClass {
 
             LocalDateTime dateWithTime = gymClassWithUser.getDateWithTime().plusSeconds(1);
             LocalDateTime dateWithTimeMinus3 = dateWithTime.minusDays(3);
-            Date twoSecondsLaterAsDate = Date.from(dateWithTimeMinus3.atZone(ZoneId.systemDefault()).toInstant());
+            Date whenToBookClass = Date.from(dateWithTimeMinus3.atZone(ZoneId.systemDefault()).toInstant());
 
-            new Timer().schedule(new ScheduleBooking(gymClassWithUser), twoSecondsLaterAsDate);
+            new Timer().schedule(new ScheduleBooking(gymClassWithUser), whenToBookClass);
 
         }
 

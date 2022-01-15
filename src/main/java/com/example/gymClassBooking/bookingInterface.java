@@ -26,7 +26,6 @@ public class bookingInterface {
 
         try {
             addABookingToList(message);
-            new TimerForClass().bookClass(allBookings.get(allBookings.size()-1));
             return "Good job, your class is booked!";
         } catch (Exception e) {
             return "one: error, something wrong with: " + message;
@@ -34,12 +33,18 @@ public class bookingInterface {
     }
 
     @GetMapping("/multiple/{message}")
-    String multiple(@PathVariable String message) {
+    String multiple(@PathVariable String message)  {
 
         System.out.println(message);
         try {
             String[] bookings = message.split("=");
-            Arrays.stream(bookings).forEach(this::addABookingToList);
+            Arrays.stream(bookings).forEach(booking -> {
+                try {
+                    addABookingToList(booking);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
             return "Good job, right format!";
         } catch (Exception e) {
             return "multiple: error, something wrong with: " + message;
@@ -58,7 +63,7 @@ public class bookingInterface {
         }
     }
 
-    public void addABookingToList(String booking) {
+    public void addABookingToList(String booking) throws InterruptedException {
 
         // sebastian-2022,1,10,16,30-BODYPUMP
         String[] dateAndClass = booking.split("-");
@@ -73,6 +78,8 @@ public class bookingInterface {
                 booking);
 
         allBookings.add(classWithUser);
+        new TimerForClass().bookClass(allBookings.get(allBookings.size()-1));
+
         System.out.println("addABookingToList() sucessfull");
     }
 
