@@ -10,6 +10,11 @@ public class GymClassWithUser {
     String userName;
     String password;
     String classId;
+
+    public LocalDateTime getDateWithTime() {
+        return dateWithTime;
+    }
+
     String url;
     String bookingQuery;
 

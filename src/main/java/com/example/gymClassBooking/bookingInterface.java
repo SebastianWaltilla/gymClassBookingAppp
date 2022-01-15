@@ -26,7 +26,7 @@ public class bookingInterface {
 
         try {
             addABookingToList(message);
-            bookingScript.run(allBookings.get(0));
+            new TimerForClass().bookClass(allBookings.get(allBookings.size()-1));
             return "Good job, your class is booked!";
         } catch (Exception e) {
             return "one: error, something wrong with: " + message;

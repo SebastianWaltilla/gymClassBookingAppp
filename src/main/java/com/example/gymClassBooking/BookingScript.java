@@ -24,11 +24,8 @@ public class BookingScript {
     }
 
 
-    public void run(GymClassWithUser gymClassWithUser) throws InterruptedException {
+    public void book(GymClassWithUser gymClassWithUser) throws InterruptedException {
 
-        //TimeUnit.MINUTES.sleep(4);
-
-        gymClassWithUser.getUrl();
         try {
             System.out.println(gymClassWithUser.getUrl());
 
